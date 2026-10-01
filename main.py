@@ -1,0 +1,19 @@
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from fastapi import FastAPI
+from legalEaseAPI.routes import router
+
+app = FastAPI(title="LegalEase - AI Legal Document Generator")
+app.include_router(router)
+
+
+@app.get("/")
+def home():
+    return {"message": "Welcome to LegalEase AI Legal Document Generator API"}
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
